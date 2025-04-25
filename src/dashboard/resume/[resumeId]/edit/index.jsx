@@ -2,24 +2,30 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import FormSection from "./components/FormSection";
 import ResumePreview from "./components/ResumePreview";
+import { ResumeInfoContext } from "@/context/ResumeInfoContext";
+import dummy from "@/data/dummy";
+import { useState } from "react";
 
 function EditResume() {
   const params = useParams();
+  const [resumeInfo, setResumeInfo] = useState();
 
   useEffect(() => {
-    console.log(params.resumeId);
+    setResumeInfo(dummy);
   }, []);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 p-10 gap-10">
-      {/* Form Section */}
+    <ResumeInfoContext.Provider value={{ resumeInfo, setResumeInfo }}>
+      <div className="grid grid-cols-1 md:grid-cols-2 p-10 gap-10">
+        {/* Form Section */}
 
-      <FormSection />
+        <FormSection />
 
-      {/* Preview Section */}
+        {/* Preview Section */}
 
-      <ResumePreview />
-    </div>
+        <ResumePreview />
+      </div>
+    </ResumeInfoContext.Provider>
   );
 }
 
