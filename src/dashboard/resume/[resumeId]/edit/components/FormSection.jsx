@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import PersonalDetails from "./forms/PersonalDetails";
-import { ArrowRight, LayoutGrid } from "lucide-react";
+import { ArrowLeft, ArrowRight, LayoutGrid } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 function FormSection() {
+  //To maintain an index we use activeFormIndex
+  const [activeFormIndex, setActiveFormIndex] = useState(1);
+  const [enabledNext, setEnableNext] = useState(false);
+
   return (
     <div>
       <div className="flex justify-between items-center">
@@ -11,15 +15,30 @@ function FormSection() {
           <LayoutGrid />
           Theme
         </Button>
-        <div>
-          <Button className="flex gap-2" size="sm">
+        <div className="flex gap-2">
+          {activeFormIndex > 1 && (
+            <Button
+              size="sm"
+              onClick={() => setActiveFormIndex(activeFormIndex - 1)}
+            >
+              <ArrowLeft />
+            </Button>
+          )}
+          <Button
+            className="flex gap-2"
+            disabled={!enabledNext}
+            size="sm"
+            onClick={() => setActiveFormIndex(activeFormIndex + 1)}
+          >
             Next <ArrowRight />
           </Button>
         </div>
       </div>
 
       {/* Personal Details */}
-      <PersonalDetails />
+      {activeFormIndex == 1 ? (
+        <PersonalDetails enableNext={(v) => setEnableNext(v)} />
+      ) : null}
       {/* Summary */}
 
       {/* Experience */}
