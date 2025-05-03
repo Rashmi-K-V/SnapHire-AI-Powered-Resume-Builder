@@ -2,37 +2,39 @@
 
 SnapHire is your intelligent career companion — an AI-driven resume builder designed to simplify, beautify, and empower your job application process. With a dynamic dashboard, real-time design customization, and powerful AI tools, SnapHire transforms resume building into a delightful experience.
 
+---
+
 ## 🧩 Key Features
 
-- 📋 **Unified Dashboard**  
+- **Unified Dashboard**  
   Keep track of all your resumes in one place. Revisit, duplicate, or edit with ease.
 
-- 🛠️ **Interactive Resume Builder**  
+- **Interactive Resume Builder**  
   Step-by-step form to input your skills, experience, education, and more — with real-time updates.
 
-- 🎨 **Live Theme Customization**  
+- **Live Theme Customization**  
   Switch between elegant color palettes and see changes reflected instantly.
 
-- 🧠 **AI Summary Generator**  
+- **AI Summary Generator**  
   Just enter a job role or skills, and let the **Google Gemini API** write a compelling summary for you.
 
-- 📄 **Download as PDF**  
+- **Download as PDF**  
   One click to download a beautifully formatted PDF — job-ready and ATS-friendly.
 
-- 🔐 **Secure Authentication**  
+- **Secure Authentication**  
   Powered by **Clerk**, ensuring your resumes stay private and safe.
 
 ---
 
 ## ⚙️ Tech Stack
 
-| Layer       | Technology              |
-| ----------- | ----------------------- |
-| 💻 Frontend | _React_, _Tailwind CSS_ |
-| 🔐 Auth     | _Clerk_                 |
-| ☁️ Backend  | _Strapi (Headless CMS)_ |
-| 📦 Database | _Supabase_              |
-| 🧠 AI       | _Google Gemini API_     |
+| Layer    | Technology              |
+| -------- | ----------------------- |
+| Frontend | _React_, _Tailwind CSS_ |
+| Auth     | _Clerk_                 |
+| Backend  | _Strapi (Headless CMS)_ |
+| Database | _Supabase_              |
+| AI       | _Google Gemini API_     |
 
 ---
 
