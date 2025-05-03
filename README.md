@@ -1,16 +1,6 @@
 # 🚀 SnapHire – AI-Powered Resume Builder
 
-> _Craft professional, stunning resumes in minutes – powered by AI, styled by you._
-
 SnapHire is your intelligent career companion — an AI-driven resume builder designed to simplify, beautify, and empower your job application process. With a dynamic dashboard, real-time design customization, and powerful AI tools, SnapHire transforms resume building into a delightful experience.
-
----
-
-## ✨ Why SnapHire?
-
-💡 Because writing a resume shouldn’t feel like a job. SnapHire takes care of structure, formatting, and even content with smart automation and beautiful UI.
-
----
 
 ## 🧩 Key Features
 
@@ -56,11 +46,40 @@ SnapHire is your intelligent career companion — an AI-driven resume builder de
 
 ## 🚀 Getting Started
 
-### 1. Clone & Install
+### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/Rashmi-K-V/SnapHire-AI-Resume-Builder.git
+git clone https://github.com/your-username/snaphire-ai-resume-builder.git
 cd snaphire-ai-resume-builder
-npm install
+```
 
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3.Set Up Environment Variables
+
+Create a .env file:
+
+```bash
+VITE_CLERK_PUBLISHABLE_KEY=your_clerk_key
+VITE_GEMINI_API_KEY=your_gemini_api_key
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+### 4.Run Server
+
+For Website
+
+```bash
+npm run dev
+```
+
+For Backend(Strapi)
+
+```bash
+npm run develop
 ```
