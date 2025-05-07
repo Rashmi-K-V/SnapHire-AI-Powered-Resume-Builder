@@ -11,6 +11,12 @@ module.exports = ({ env }) => ({
         rejectUnauthorized: env.bool('DATABASE_SSL_REJECT_UNAUTHORIZED', false),
       } : false,
       schema: env('DATABASE_SCHEMA', 'public'),
-    },
+    },pool: {
+      min: 0,
+      max: 5, // Lowered for Supabase
+      idleTimeoutMillis: 10000,
+      acquireTimeoutMillis: 20000,
+    }
+    
   },
 });

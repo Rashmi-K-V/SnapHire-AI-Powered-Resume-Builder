@@ -20,8 +20,7 @@ import {
 import { AIChatSession } from "./../../../../../../service/AIModel";
 import { toast } from "sonner";
 
-const PROMPT =
-  "position title : {positionTitle} , Depend  on  position give me 5-7 bullet points for my experience in resume ,give me the result in HTML format ";
+const PROMPT = `I am writing a resume for the position of "{positionTitle}". Generate 4-5 professional experience bullet points for this role. Return the result ONLY as an HTML  Do not include any JSON, metadata, or explanation.`;
 
 function RichTextEditor({ onRichTextEditorChange, index }) {
   const [value, setValue] = useState();
@@ -32,16 +31,29 @@ function RichTextEditor({ onRichTextEditorChange, index }) {
     setLoading(true);
     if (!resumeInfo.experience[index].title) {
       toast("Please Add Position Title First");
+      setLoading(false);
       return;
     }
     const prompt = PROMPT.replace(
       "{positionTitle}",
       resumeInfo.experience[index].title
     );
+
     const result = await AIChatSession.sendMessage(prompt);
-    console.log(result.response.text());
+
+    // console.log(result.response.text());
     const resp = result.response.text();
-    setValue(resp.replace("[", "").replace("]", ""));
+    // setValue(resp.replace("[", "").replace("]", ""));
+
+    const cleanedResponse = resp.replace("[", "").replace("]", "");
+
+    // Ensure the response is a valid HTML string
+    const htmlResponse = cleanedResponse.startsWith("<")
+      ? cleanedResponse
+      : `<p>${cleanedResponse}</p>`;
+
+    setValue(htmlResponse);
+
     setLoading(false);
   };
 
