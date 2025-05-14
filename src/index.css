@@ -1,25 +1,24 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@media print{
-  #no-print{
+@media print {
+  #no-print {
     display: none;
   }
-  #print-area{
+  #print-area {
     display: block;
   }
-  body{
+  body {
     margin: 0;
     padding: 0;
     box-shadow: none;
   }
 }
 
-@page{
+@page {
   size: auto;
   margin: 0mm;
 }
-
 
 .rsw-ce ul {
   list-style: disc;

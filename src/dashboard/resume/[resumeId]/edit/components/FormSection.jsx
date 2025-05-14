@@ -9,6 +9,7 @@ import Skills from "./forms/Skills";
 
 import { Link, Navigate, useParams } from "react-router-dom";
 import ViewResume from "@/my-resume/[resumeId]/view";
+import ThemeColor from "./ThemeColor";
 
 function FormSection() {
   //To maintain an index we use activeFormIndex
@@ -26,10 +27,7 @@ function FormSection() {
             </Button>
           </Link>
 
-          <Button variant="outline" size="sm" className="flex gap-2 ">
-            <LayoutGrid />
-            Theme
-          </Button>
+          <ThemeColor />
         </div>
         <div className="flex gap-2">
           {activeFormIndex > 1 && (
