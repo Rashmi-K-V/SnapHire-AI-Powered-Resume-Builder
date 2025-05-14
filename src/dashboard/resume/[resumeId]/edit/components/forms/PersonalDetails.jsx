@@ -21,7 +21,8 @@ function PersonalDetails({ enabledNext }) {
   }, []);
 
   const handleInputChange = (e) => {
-    enabledNext(false);
+    // enabledNext(false); Should be false when user is typing
+    enabledNext(true);
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -49,6 +50,8 @@ function PersonalDetails({ enabledNext }) {
       },
       (error) => {
         setLoading(false);
+        toast("Server Error,Please try again");
+        console.log(error);
       }
     );
   };

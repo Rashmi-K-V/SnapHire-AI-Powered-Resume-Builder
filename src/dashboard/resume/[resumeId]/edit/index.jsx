@@ -12,13 +12,13 @@ function EditResume() {
   const [resumeInfo, setResumeInfo] = useState();
 
   useEffect(() => {
-    setResumeInfo(dummy);
     GetResumeInfo();
   }, []);
 
   const GetResumeInfo = () => {
     GlobalApi.GetResumeById(resumeId).then((resp) => {
       console.log(resp.data.data);
+      setResumeInfo(resp.data.data);
     });
   };
 

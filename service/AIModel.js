@@ -13,7 +13,7 @@ const generationConfig = {
   maxOutputTokens: 8192,
   topP: 0.95,
   topK: 64,
-  responseMimeType: 'application/json',
+  responseMimeType: "application/json",
 }
 
 export const AIChatSession = model.startChat({

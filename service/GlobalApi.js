@@ -18,7 +18,7 @@ const GetUserResumes=(userEmail)=>axiosClient.get('/user-resumes?*filters[userEm
 
 const UpdateResumeDetail = (id, data) => axiosClient.put('/user-resumes/' + id, data)
 
-const GetResumeById = (id) => axiosClient.get('/user-resumes/' + id)
+const GetResumeById = (id) => axiosClient.get('/user-resumes/' + id+"?populate=*")
 
 export default{ 
     GetUserResumes,

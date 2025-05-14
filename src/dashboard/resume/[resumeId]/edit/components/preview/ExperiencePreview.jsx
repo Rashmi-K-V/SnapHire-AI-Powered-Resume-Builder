@@ -11,7 +11,7 @@ function ExperiencePreview({ resumeInfo }) {
       </h2>
       <hr style={{ borderColor: resumeInfo?.themeColor }} />
 
-      {resumeInfo?.experience.map((experience, index) => (
+      {resumeInfo?.experience?.map((experience, index) => (
         <div key={index} className="my-5">
           <h2
             className="text-sm font-bold"
@@ -30,7 +30,20 @@ function ExperiencePreview({ resumeInfo }) {
           </h2>
           {/* <p className="text-xs my-2">{experience?.workSummary}</p> */}
 
-          <div dangerouslySetInnerHTML={{ __html: experience?.workSummary }} />
+          <div
+            dangerouslySetInnerHTML={{ __html: experience?.workSummary }}
+            className="text-xs"
+          />
+
+          {/* <ul className="text-xs list-disc ml-5">
+            {experience?.workSummary
+              ?.replace(/<\/?[^>]+(>|$)/g, "") // Strip HTML tags
+              ?.split("\n") // Split by newlines (you may use `<li>` if your rich text returns HTML)
+              ?.filter((line) => line.trim() !== "") // Remove empty lines
+              ?.map((line, i) => (
+                <li key={i}>{line.trim()}</li>
+              ))}
+          </ul> */}
         </div>
       ))}
     </div>

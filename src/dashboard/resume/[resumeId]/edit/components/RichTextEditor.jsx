@@ -20,10 +20,11 @@ import {
 import { AIChatSession } from "./../../../../../../service/AIModel";
 import { toast } from "sonner";
 
-const PROMPT = `I am writing a resume for the position of "{positionTitle}". Generate 4-5 professional experience bullet points for this role. Return the result ONLY as an HTML  Do not include any JSON, metadata, or explanation.`;
+const PROMPT =
+  'Write 3-4 bullet points describing professional experience for the position of "{positionTitle}". Only return the bullet points in plain English. Do not include any brackets, JSON, or extra formatting. Just return the points as plain text.';
 
-function RichTextEditor({ onRichTextEditorChange, index }) {
-  const [value, setValue] = useState();
+function RichTextEditor({ onRichTextEditorChange, index, defaultValue }) {
+  const [value, setValue] = useState(defaultValue || "");
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
   const [loading, setLoading] = useState(false);
 
@@ -36,23 +37,34 @@ function RichTextEditor({ onRichTextEditorChange, index }) {
     }
     const prompt = PROMPT.replace(
       "{positionTitle}",
-      resumeInfo.experience[index].title
+      resumeInfo?.experience[index].title
     );
 
     const result = await AIChatSession.sendMessage(prompt);
-
-    // console.log(result.response.text());
+    console.log(result.response.text());
     const resp = result.response.text();
     // setValue(resp.replace("[", "").replace("]", ""));
 
-    const cleanedResponse = resp.replace("[", "").replace("]", "");
+    const lines = resp
+      .split("\n")
+      .filter((line) => line.trim())
+      .map(
+        (line) => `<li>${line.replace(/^[-•*]+\s*/, "")}</li>` // remove leading bullets
+      );
 
-    // Ensure the response is a valid HTML string
-    const htmlResponse = cleanedResponse.startsWith("<")
-      ? cleanedResponse
-      : `<p>${cleanedResponse}</p>`;
+    const htmlList = `<ul>${lines.join("")}</ul>`;
 
-    setValue(htmlResponse);
+    setValue(htmlList);
+
+    // const text = result.response.text();
+    // const cleaned = text
+    //   .replace(/^\[|\]$/g, "") // Remove outer brackets
+    //   .replace(/^["“”]+|["“”]+$/gm, "") // Remove start/end quotes
+    //   .replace(/\\n/g, "\n") // Decode newlines
+    //   .replace(/^[\-\•\*]+\s*/gm, "- ") // Normalize bullets
+    //   .trim();
+
+    // setValue(cleaned);
 
     setLoading(false);
   };

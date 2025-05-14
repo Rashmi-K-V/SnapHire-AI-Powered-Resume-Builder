@@ -19,6 +19,11 @@ function Skills() {
   const [loading, setLoading] = useState(false);
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
   const { resumeId } = useParams();
+
+  useEffect(() => {
+    resumeInfo && setSkillList(resumeInfo?.skills);
+  }, []);
+
   const handleChange = (index, name, value) => {
     const newEntries = skillList.slice();
     newEntries[index][name] = value;
@@ -41,7 +46,7 @@ function Skills() {
     setLoading(true);
     const data = {
       data: {
-        skills: skillList,
+        skills: skillList.map(({ id, ...rest }) => rest),
       },
     };
 
@@ -77,6 +82,7 @@ function Skills() {
               <Input
                 className="w-full"
                 onChange={(e) => handleChange(index, "name", e.target.value)}
+                defaultValue={item?.name}
               />
             </div>
 
@@ -84,6 +90,7 @@ function Skills() {
               style={{ maxWidth: 120 }}
               value={item.rating}
               onChange={(v) => handleChange(index, "rating", v)}
+              defaultValue={item?.rating}
             />
           </div>
         ))}
