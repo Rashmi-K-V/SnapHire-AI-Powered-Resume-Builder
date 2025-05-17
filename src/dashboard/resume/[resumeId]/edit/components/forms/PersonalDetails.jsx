@@ -108,11 +108,29 @@ function PersonalDetails({ enabledNext }) {
               required
             />
           </div>
-          <div>
+          <div className="gap-1">
             <label className="text-sm">Email</label>
             <Input
               name="email"
               defaultValue={resumeInfo?.email}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div>
+            <label className="text-sm">Github Url</label>
+            <Input
+              name="githubURL"
+              defaultValue={resumeInfo?.githubURL}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div>
+            <label className="text-sm">LinkedIn Profile</label>
+            <Input
+              name="linkedinURL"
+              defaultValue={resumeInfo?.linkedinURL}
               onChange={handleInputChange}
               required
             />

@@ -24,8 +24,10 @@ function Experience() {
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
 
   useEffect(() => {
-    resumeInfo && setExperienceList(resumeInfo?.experience);
-  }, [resumeInfo]);
+    if (resumeInfo?.experience) {
+      setExperienceList(resumeInfo.experience);
+    }
+  }, []);
 
   const handleChange = (index, event) => {
     const newEntries = experienceList.slice();
@@ -57,13 +59,12 @@ function Experience() {
     newEntries[index][name] = e.target.value;
     setExperienceList(newEntries);
   };
-
-  // useEffect(() => {
-  //   setResumeInfo({
-  //     ...resumeInfo,
-  //     experience: experienceList,
-  //   });
-  // }, [experienceList]);
+  useEffect(() => {
+    setResumeInfo({
+      ...resumeInfo,
+      experience: experienceList,
+    });
+  }, [experienceList]);
 
   const onSave = () => {
     setLoading(true);

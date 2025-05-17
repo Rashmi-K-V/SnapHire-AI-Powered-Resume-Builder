@@ -62,6 +62,12 @@
     },
     "themeColor": {
       "type": "string"
+    },
+    "githubURL": {
+      "type": "string"
+    },
+    "linkedinURL": {
+      "type": "string"
     }
   }
 }

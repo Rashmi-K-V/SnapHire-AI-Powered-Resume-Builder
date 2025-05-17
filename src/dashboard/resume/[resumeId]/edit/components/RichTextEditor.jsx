@@ -21,7 +21,7 @@ import { AIChatSession } from "./../../../../../../service/AIModel";
 import { toast } from "sonner";
 
 const PROMPT =
-  'Write 3-4 bullet points describing professional experience for the position of "{positionTitle}". Only return the bullet points in plain English. Do not include any brackets, JSON, or extra formatting. Just return the points as plain text.';
+  'Write 3-4 lines describing professional experience for the position of "{positionTitle}". Only return the bullet points in plain English. Do not include any brackets, JSON, or extra formatting. Just return the points as plain text.';
 
 function RichTextEditor({ onRichTextEditorChange, index, defaultValue }) {
   const [value, setValue] = useState(defaultValue || "");
@@ -43,28 +43,7 @@ function RichTextEditor({ onRichTextEditorChange, index, defaultValue }) {
     const result = await AIChatSession.sendMessage(prompt);
     console.log(result.response.text());
     const resp = result.response.text();
-    // setValue(resp.replace("[", "").replace("]", ""));
-
-    const lines = resp
-      .split("\n")
-      .filter((line) => line.trim())
-      .map(
-        (line) => `<li>${line.replace(/^[-•*]+\s*/, "")}</li>` // remove leading bullets
-      );
-
-    const htmlList = `<ul>${lines.join("")}</ul>`;
-
-    setValue(htmlList);
-
-    // const text = result.response.text();
-    // const cleaned = text
-    //   .replace(/^\[|\]$/g, "") // Remove outer brackets
-    //   .replace(/^["“”]+|["“”]+$/gm, "") // Remove start/end quotes
-    //   .replace(/\\n/g, "\n") // Decode newlines
-    //   .replace(/^[\-\•\*]+\s*/gm, "- ") // Normalize bullets
-    //   .trim();
-
-    // setValue(cleaned);
+    setValue(resp.replace("[", "").replace("]", ""));
 
     setLoading(false);
   };

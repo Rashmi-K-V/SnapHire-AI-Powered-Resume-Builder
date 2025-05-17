@@ -61,7 +61,7 @@ function ResumeCardItem({ resume, refreshData }) {
           background: resume?.themeColor || "#EF4444",
         }}
       >
-        <h2 className="text-xs font-medium text-white hover:scale-105">
+        <h2 className="text-xs font-bold text-white  hover:scale-105">
           {resume.title}
         </h2>
 

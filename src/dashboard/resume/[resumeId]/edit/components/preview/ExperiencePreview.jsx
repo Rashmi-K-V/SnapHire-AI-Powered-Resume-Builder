@@ -24,18 +24,12 @@ function ExperiencePreview({ resumeInfo }) {
           <h2 className="text-xs flex justify-between">
             {experience?.companyName},{experience?.city},{experience?.state}
             <span>
-              {experience?.startDate} To {""}
-              {experience?.currentlyWorking ? "Present" : experience.endDate}
+              {experience?.startDate} To{" "}
+              {experience?.currentlyWorking ? "Present" : experience?.endDate}
             </span>
           </h2>
-          {/* <p className="text-xs my-2">{experience?.workSummary}</p> */}
 
-          <div
-            dangerouslySetInnerHTML={{ __html: experience?.workSummary }}
-            className="text-xs"
-          />
-
-          {/* <ul className="text-xs list-disc ml-5">
+          <ul className="text-xs list-disc ml-5">
             {experience?.workSummary
               ?.replace(/<\/?[^>]+(>|$)/g, "") // Strip HTML tags
               ?.split("\n") // Split by newlines (you may use `<li>` if your rich text returns HTML)
@@ -43,7 +37,7 @@ function ExperiencePreview({ resumeInfo }) {
               ?.map((line, i) => (
                 <li key={i}>{line.trim()}</li>
               ))}
-          </ul> */}
+          </ul>
         </div>
       ))}
     </div>
