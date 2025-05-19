@@ -70,65 +70,65 @@ function Education() {
   };
 
   useEffect(() => {
-    setResumeInfo({
-      ...resumeInfo,
-      education: educationList,
-    });
-  }, [educationList]);
+    if (resumeInfo?.education && Array.isArray(resumeInfo.education)) {
+      setEducationList(resumeInfo.education);
+    }
+  }, [resumeInfo]);
 
   return (
     <div className="p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10">
       <h2 className="font-bold text-lg">Education Details</h2>
       <p>Add Educational Details</p>
       <div>
-        {educationList.map((item, index) => (
-          <div>
-            <div className="grid grid-cols-2 gap-3 border p-3 my-5 rounded-lg">
-              <div className="col-span-2">
-                <label>University Name</label>
-                <Input
-                  name="universityName"
-                  onChange={(e) => handleChange(e, index)}
-                  defaultValue={item?.universityName}
-                />
-              </div>
-              <div>
-                <label>Degree</label>
-                <Input
-                  name="degree"
-                  onChange={(e) => handleChange(e, index)}
-                  defaultValue={item?.degree}
-                />
-              </div>
-              <div>
-                <label>Major</label>
-                <Input
-                  name="major"
-                  onChange={(e) => handleChange(e, index)}
-                  defaultValue={item?.major}
-                />
-              </div>
-              <div>
-                <label>Start Date</label>
-                <Input
-                  type="date"
-                  name="startDate"
-                  onChange={(e) => handleChange(e, index)}
-                  defaultValue={item?.startDate}
-                />
-              </div>
-              <div>
-                <label>End Date</label>
-                <Input
-                  type="date"
-                  name="endDate"
-                  onChange={(e) => handleChange(e, index)}
-                  defaultValue={item?.endDate}
-                />
+        {Array.isArray(educationList) &&
+          educationList.map((item, index) => (
+            <div>
+              <div className="grid grid-cols-2 gap-3 border p-3 my-5 rounded-lg">
+                <div className="col-span-2">
+                  <label>University Name</label>
+                  <Input
+                    name="universityName"
+                    onChange={(e) => handleChange(e, index)}
+                    defaultValue={item?.universityName}
+                  />
+                </div>
+                <div>
+                  <label>Degree</label>
+                  <Input
+                    name="degree"
+                    onChange={(e) => handleChange(e, index)}
+                    defaultValue={item?.degree}
+                  />
+                </div>
+                <div>
+                  <label>Major</label>
+                  <Input
+                    name="major"
+                    onChange={(e) => handleChange(e, index)}
+                    defaultValue={item?.major}
+                  />
+                </div>
+                <div>
+                  <label>Start Date</label>
+                  <Input
+                    type="text"
+                    name="startDate"
+                    onChange={(e) => handleChange(e, index)}
+                    defaultValue={item?.startDate}
+                  />
+                </div>
+                <div>
+                  <label>End Date</label>
+                  <Input
+                    type="text"
+                    name="endDate"
+                    onChange={(e) => handleChange(e, index)}
+                    defaultValue={item?.endDate}
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
       <div className="flex justify-between items-center mt-5">
         <div className="flex gap-2">

@@ -14,10 +14,11 @@ module.exports = ({ env }) => ({
 
     },
     pool: {
-      min: 2,
-      max: 5,
-      idleTimeoutMillis: 10000,
-      acquireTimeoutMillis: 20000,
+  min: 0,
+  max: 5, // never go over 5 on free tier
+  idleTimeoutMillis: 10000,
+  acquireTimeoutMillis: 20000,
     },
+
   },
 });

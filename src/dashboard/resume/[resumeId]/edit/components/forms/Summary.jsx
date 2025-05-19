@@ -12,12 +12,10 @@ function Summary({ enabledNext }) {
   const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
 
   const [loading, setLoading] = useState(false);
-  const [summary, setSummary] = useState(); // Initialize with existing summary if available
+  const [summary, setSummary] = useState();
   const params = useParams();
-
   const [aiGeneratedSummaryList, setAiGeneratedSummaryList] = useState();
 
-  // Update context and state on every keystroke
   useEffect(() => {
     summary &&
       setResumeInfo({
@@ -32,10 +30,25 @@ function Summary({ enabledNext }) {
   const GenerateSummaryFromAI = async () => {
     setLoading(true);
     const PROMPT = prompt.replace("{jobTitle}", resumeInfo?.jobTitle);
-    console.log("Prompt: ", PROMPT);
-    const result = await AIChatSession.sendMessage(PROMPT);
-    console.log(JSON.parse(result.response.text()));
-    setAiGeneratedSummaryList(JSON.parse([result.response.text()]));
+
+    try {
+      const result = await AIChatSession.sendMessage(PROMPT);
+      const parsed = JSON.parse(result.response.text());
+
+      const normalized = parsed.map((item) => ({
+        experienceLevel:
+          item.experienceLevel ||
+          item.ExperienceLevel ||
+          item.experience_level ||
+          "",
+        summary: item.summary || item.Summary || item.SUMMARY || "",
+      }));
+
+      setAiGeneratedSummaryList(normalized);
+    } catch (err) {
+      toast.error("⚠️ Failed to parse AI response. Please try again.");
+    }
+
     setLoading(false);
   };
 
@@ -49,13 +62,13 @@ function Summary({ enabledNext }) {
     };
     GlobalApi.UpdateResumeDetail(params?.resumeId, data).then(
       (resp) => {
-        console.log(resp);
         enabledNext(true);
         setLoading(false);
         toast("Details Updated");
       },
       (error) => {
         setLoading(false);
+        toast.error("⚠️ Failed to save summary.");
       }
     );
   };
@@ -99,10 +112,10 @@ function Summary({ enabledNext }) {
 
       {aiGeneratedSummaryList && (
         <div>
-          <h2 className="font-bold text-lg">Suggestions</h2>
+          <h2 className="font-bold text-lg mt-6">Suggestions</h2>
           {aiGeneratedSummaryList?.map((item, index) => (
             <div key={index}>
-              <h2 className="font-bold my-1">Level:{item?.experienceLevel}</h2>
+              <h2 className="font-bold my-1">Level: {item?.experienceLevel}</h2>
               <p>{item?.summary}</p>
             </div>
           ))}

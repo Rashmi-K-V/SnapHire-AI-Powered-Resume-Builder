@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Popover,
   PopoverContent,
@@ -11,65 +11,81 @@ import GlobalApi from "./../../../../../../service/GlobalApi";
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
 
-function ThemeColor() {
+function ThemeColor({ isParsedResume = false, selectedColor, onColorChange }) {
   const colors = [
     "#E91E63",
     "#5C6BC0",
     "#4CAF50",
-    "#FFC107",
+    "#9C27B0",
     "#9E9E9E",
-    "#F44336",
+    "#F06292",
     "#2196F3",
-    "#43A047",
-    "#FF9800",
+    "#66BB6A",
+    "#BA68C8",
     "#757575",
     "#C2185B",
     "#1E88E5",
     "#2E7D32",
-    "#FF5722",
+    "#AB47BC",
     "#616161",
     "#B71C1C",
     "#0D47A1",
     "#1B5E20",
-    "#FB8C00",
+    "#8E24AA",
     "#424242",
     "#880E4F",
     "#1565C0",
     "#00695C",
-    "#EF6C00",
+    "#6A1B9A",
     "#000000",
   ];
+
+  const resumeContext = useContext(ResumeInfoContext);
   const { resumeId } = useParams();
-  const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
-  const [selectedColor, setSelectedColor] = useState();
+  const [localColor, setLocalColor] = useState(selectedColor || "#E91E63");
+
+  const isInEditor = !!resumeContext;
 
   const onColorSelect = (color) => {
-    setSelectedColor(color);
-    setResumeInfo({
-      ...resumeInfo,
-      themeColor: color,
-    });
-    const data = {
-      data: {
+    if (isInEditor) {
+      resumeContext.setResumeInfo({
+        ...resumeContext.resumeInfo,
         themeColor: color,
-      },
-    };
+      });
 
-    GlobalApi.UpdateResumeDetail(resumeId, data).then(
-      (resp) => {
-        console.log(resp);
-        toast("Theme Color Added Successfully!");
-      },
-      (error) => {
-        toast("Couldn't save Please try Again later!");
-      }
-    );
+      GlobalApi.UpdateResumeDetail(resumeId, {
+        data: { themeColor: color },
+      }).then(
+        () => toast("Theme Color Updated!"),
+        () => toast("Could not update color.")
+      );
+    } else {
+      setLocalColor(color);
+      onColorChange?.(color);
+    }
   };
+
+  // Auto-set black for parsed resumes (in edit view only)
+  useEffect(() => {
+    if (
+      isParsedResume &&
+      isInEditor &&
+      resumeContext?.resumeInfo?.themeColor !== "#000000"
+    ) {
+      onColorSelect("#000000");
+    }
+  }, [isParsedResume]);
+
+  if (isParsedResume && !onColorChange) return null; // hide in parsed mode in editor
+
+  const activeColor = isInEditor
+    ? resumeContext?.resumeInfo?.themeColor
+    : localColor;
 
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="outline" size="sm" className="flex gap-2 ">
+        <Button variant="outline" size="sm" className="flex gap-2">
           <LayoutGrid />
           Theme
         </Button>
@@ -79,13 +95,12 @@ function ThemeColor() {
         <div className="grid grid-cols-5 gap-4">
           {colors.map((item, index) => (
             <div
+              key={index}
               onClick={() => onColorSelect(item)}
               className={`h-5 w-5 rounded-full cursor-pointer hover:border-black border ${
-                selectedColor == item && "border border-black"
+                activeColor === item ? "border-black" : ""
               }`}
-              style={{
-                background: item,
-              }}
+              style={{ background: item }}
             ></div>
           ))}
         </div>

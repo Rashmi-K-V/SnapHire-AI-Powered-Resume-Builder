@@ -2,7 +2,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ResumeInfoContext } from "@/context/ResumeInfoContext";
 import React, { useContext, useEffect, useState } from "react";
-import { Rating, RoundedStar } from "@smastrom/react-rating";
+import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { LoaderCircle } from "lucide-react";
 import GlobalApi from "./../../../../../../../service/GlobalApi";
@@ -21,11 +21,16 @@ function Skills() {
   const { resumeId } = useParams();
 
   useEffect(() => {
-    resumeInfo && setSkillList(resumeInfo?.skills);
-  }, []);
+    if (!resumeInfo?.skills || resumeInfo.skills.length !== skillList.length) {
+      setResumeInfo((prev) => ({
+        ...prev,
+        skills: skillList,
+      }));
+    }
+  }, [skillList]);
 
   const handleChange = (index, name, value) => {
-    const newEntries = skillList.slice();
+    const newEntries = [...skillList];
     newEntries[index][name] = value;
     setSkillList(newEntries);
   };
@@ -39,9 +44,13 @@ function Skills() {
       },
     ]);
   };
+
   const RemoveSkills = () => {
-    setSkillList((skillList) => skillList.slice(0, -1));
+    if (skillList.length > 1) {
+      setSkillList(skillList.slice(0, -1));
+    }
   };
+
   const onSave = () => {
     setLoading(true);
     const data = {
@@ -76,7 +85,10 @@ function Skills() {
       <p>Add your top Skills</p>
       <div>
         {skillList.map((item, index) => (
-          <div className="flex justify-between  border rounded-l-lg p-3 mb-2 mt-2">
+          <div
+            key={index}
+            className="flex justify-between items-center border rounded-lg p-3 mb-2 mt-2"
+          >
             <div>
               <label className="text-xs">Skill Name</label>
               <Input
@@ -108,12 +120,13 @@ function Skills() {
             variant="outline"
             className="text-primary border-primary"
             onClick={RemoveSkills}
+            disabled={skillList.length <= 1}
           >
             Remove
           </Button>
         </div>
 
-        <Button disabled={loading} onClick={() => onSave()}>
+        <Button disabled={loading} onClick={onSave}>
           {loading ? <LoaderCircle className="animate-spin" /> : "Save"}
         </Button>
       </div>

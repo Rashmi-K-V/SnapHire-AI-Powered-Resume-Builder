@@ -18,11 +18,12 @@ function PersonalDetails({ enabledNext }) {
 
   useEffect(() => {
     console.log(params);
+    enabledNext(true);
   }, []);
 
   const handleInputChange = (e) => {
     // enabledNext(false); Should be false when user is typing
-    enabledNext(true);
+
     const { name, value } = e.target;
     setFormData({
       ...formData,

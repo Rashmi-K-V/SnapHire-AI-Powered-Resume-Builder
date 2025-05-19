@@ -1,33 +1,41 @@
 import React from "react";
 import { UserButton, useUser } from "@clerk/clerk-react";
 import { Button } from "../ui/button";
-import { Link, Links, Outlet } from "react-router-dom";
-import SignInPage from "@/auth/sign-in";
-import Dashboard from "@/dashboard/index.jsx";
+import { Link } from "react-router-dom";
 
 function Header() {
   const { user, isSignedIn } = useUser();
 
   return (
-    <div className="p-2 pt-3 flex justify-between shadow-md">
-      <img src="/logo.svg" alt="logo" height={25} />
+    <header className="w-full px-5 py-3 flex justify-between items-center shadow-md z-10  bg-blend-lighten">
+      {/* Logo and Branding */}
+      <div className="flex items-center gap-2">
+        <img src="/logo.svg" alt="logo" className="h-10" />
+        <span className="text-2xl font-extrabold bg-gradient-to-r from-rose-500 to-indigo-500 text-transparent bg-clip-text">
+          SnapHire
+        </span>
+      </div>
 
-      {isSignedIn ? (
-        <div className="flex gap-2 items-center">
-          <Link to={"/dashboard"}>
-            <Button className=" px-6 py-3 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold shadow-lg hover:scale-105 transition-transform duration-300">
-              Dashboard
+      {/* Right Side - Auth Buttons */}
+      <div className="flex items-center gap-4">
+        {isSignedIn ? (
+          <>
+            <Link to="/dashboard">
+              <Button className="px-5 py-2 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 text-white font-semibold shadow-md hover:scale-105 transition-transform duration-300">
+                Dashboard
+              </Button>
+            </Link>
+            <UserButton afterSignOutUrl="/" />
+          </>
+        ) : (
+          <Link to="/auth/sign-in">
+            <Button className="px-5 py-2 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 text-white font-semibold shadow-md hover:scale-105 transition-transform duration-300">
+              Get Started
             </Button>
           </Link>
-          <UserButton />
-        </div>
-      ) : (
-        //  At click of Get Started, it will direct to auth/sign-in
-        <Link to={"/auth/sign-in"}>
-          <Button>Get Started</Button>
-        </Link>
-      )}
-    </div>
+        )}
+      </div>
+    </header>
   );
 }
 
