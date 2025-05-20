@@ -98,8 +98,8 @@ const UploadResume = () => {
   };
 
   return (
-    <div className="p-12 max-w-md mx-auto mt-20 bg-gradient-to-r from-violet-300 via-pink-300 to-rose-300 rounded-3xl shadow-2xl text-[#F7FFB0]">
-      <h2 className="text-4xl font-extrabold text-center mb-8 drop-shadow-lg">
+    <div className="p-12 max-w-md mx-auto mt-20 bg-gradient-to-r from-violet-200 via-indigo-300 to-purple-300 rounded-3xl  text-[#FFFFFF] shadow-lg">
+      <h2 className="text-4xl font-extrabold text-center mb-8 ">
         Upload Your Resume
       </h2>
 
@@ -110,7 +110,7 @@ const UploadResume = () => {
         {file ? (
           <p className="text-white font-semibold text-lg">{file.name}</p>
         ) : (
-          <p className="text-slate-700 text-md font-light select-none">
+          <p className="text-slate-600 text-md font-light select-none">
             Click here to select a Word document ONLY{" "}
           </p>
         )}
@@ -123,7 +123,7 @@ const UploadResume = () => {
         />
       </label>
 
-      <p className="mt-6 text-center text-white text-sm select-none">
+      <p className="mt-6 text-center text-slate-600 text-sm select-none">
         Supported formats: <span className="font-semibold">.docx</span>
       </p>
 

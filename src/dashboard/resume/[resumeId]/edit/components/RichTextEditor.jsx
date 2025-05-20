@@ -21,7 +21,7 @@ import { AIChatSession } from "./../../../../../../service/AIModel";
 import { toast } from "sonner";
 
 const PROMPT =
-  'Write 3-4 lines describing professional experience for the position of "{positionTitle}". Only return the bullet points in plain English. Do not include any brackets, JSON, or extra formatting. Just return the points as plain text.';
+  'Write 3-4 lines only describing professional experience for the position of "{positionTitle}". Only return the bullet points in plain English. Do not include any brackets, JSON, or extra formatting. Just return the points as plain text.';
 
 function RichTextEditor({ onRichTextEditorChange, index, defaultValue }) {
   const [value, setValue] = useState(defaultValue || "");

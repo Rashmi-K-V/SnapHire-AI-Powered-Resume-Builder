@@ -40,6 +40,7 @@ function Summary({ enabledNext }) {
           item.experienceLevel ||
           item.ExperienceLevel ||
           item.experience_level ||
+          item.experienceLevels ||
           "",
         summary: item.summary || item.Summary || item.SUMMARY || "",
       }));

@@ -80,7 +80,7 @@ function Education() {
       <h2 className="font-bold text-lg">Education Details</h2>
       <p>Add Educational Details</p>
       <div>
-        {Array.isArray(educationList) &&
+        {educationList &&
           educationList.map((item, index) => (
             <div>
               <div className="grid grid-cols-2 gap-3 border p-3 my-5 rounded-lg">
