@@ -1,40 +1,58 @@
 # 🚀 SnapHire – AI-Powered Resume Builder
 
-SnapHire is your intelligent career companion — an AI-driven resume builder designed to simplify, beautify, and empower your job application process. With a dynamic dashboard, real-time design customization, and powerful AI tools, SnapHire transforms resume building into a delightful experience.
+**SnapHire** is your intelligent career companion — an AI-driven resume builder designed to simplify, beautify, and empower your job application process. With a dynamic dashboard, real-time customization, and powerful AI tools, SnapHire transforms resume building into a delightful experience.
 
 ---
 
 ## 🧩 Key Features
 
-- **Unified Dashboard**  
-  Keep track of all your resumes in one place. Revisit, duplicate, or edit with ease.
+- **📁 Unified Dashboard**  
+  Manage all your resumes in one place. Revisit, duplicate, or edit them with ease.
 
-- **Interactive Resume Builder**  
-  Step-by-step form to input your skills, experience, education, and more — with real-time updates.
+- **🧱 Interactive Resume Builder**  
+  Step-by-step form to input your personal details, skills, experience, and education — with live visual updates.
 
-- **Live Theme Customization**  
-  Switch between elegant color palettes and see changes reflected instantly.
+- **🎨 Live Theme Customization**  
+  Manually created resumes can be styled using elegant color palettes in real time.
 
-- **AI Summary Generator**  
-  Just enter a job role or skills, and let the **Google Gemini API** write a compelling summary for you.
+- **🤖 AI Summary Generator**  
+  Enter your job title or key skills, and let the **Google Gemini API** generate a professional, ATS-optimized summary.
 
-- **Download as PDF**  
-  One click to download a beautifully formatted PDF — job-ready and ATS-friendly.
+- **📤 Resume Upload & Parsing (.docx only)**  
+  Upload an existing resume in **Microsoft Word (.docx)** format. SnapHire uses **Google Gemini** to intelligently parse its content and convert it into SnapHire’s structured, editable format.  
+  ⚠️ **Parsed resumes are assigned a default black theme and cannot be customized.**
 
-- **Secure Authentication**  
-  Powered by **Clerk**, ensuring your resumes stay private and safe.
+- **📥 Download as PDF**  
+  Export a professionally styled, ATS-friendly resume with one click.
+
+- **🔐 Secure Authentication**  
+  Powered by **Clerk** to ensure your data remains secure and private.
 
 ---
 
 ## ⚙️ Tech Stack
 
-| Layer    | Technology              |
-| -------- | ----------------------- |
-| Frontend | _React_, _Tailwind CSS_ |
-| Auth     | _Clerk_                 |
-| Backend  | _Strapi (Headless CMS)_ |
-| Database | _Supabase_              |
-| AI       | _Google Gemini API_     |
+| Layer    | Technology            |
+| -------- | --------------------- |
+| Frontend | React, Tailwind CSS   |
+| Auth     | Clerk                 |
+| Backend  | Strapi (Headless CMS) |
+| Database | Supabase              |
+| AI       | Google Gemini API     |
+
+---
+
+## 📂 Resume Upload & Parsing
+
+Easily import your existing resume into SnapHire:
+
+- Supported format: `.docx` (Microsoft Word only)
+- Parsing handled by **Google Gemini API**
+- Extracted fields include name, email, phone, skills, education, experience, and summary
+- Auto-filled into SnapHire’s interface
+- **Theme color is fixed to black** for parsed resumes
+
+This feature helps you quickly transform your existing resume into a polished, editable SnapHire format with minimal manual input.
 
 ---
 
